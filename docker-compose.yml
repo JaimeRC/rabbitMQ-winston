@@ -1,0 +1,49 @@
+
+version: '3'
+
+services:
+
+  producer:
+    build:
+      context: ./
+      dockerfile: producer/Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./producer:/usr/src/app
+    networks:
+      - app-network
+    environment:
+      - URL_RABBIT=amqp://rabbitmq
+      - NODE_ENV=local_devel
+      - PORT_EXPRESS=8080
+      - PATH_LOGS_SUCCESS=¿?
+      - PATH_LOGS_ERROR=¿?
+    links:
+      - rabbitmq
+
+  consumer:
+    build:
+      context: ./
+      dockerfile: consumer/Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./consumer:/usr/src/app
+    networks:
+      - app-network
+    environment:
+      - URL_RABBIT=amqp://rabbitmq
+      - NODE_ENV=local_devel
+      - PORT_EXPRESS=8080
+      - PATH_LOGS_SUCCESS=¿?
+      - PATH_LOGS_ERROR=¿?
+    links:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3.7.4
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
