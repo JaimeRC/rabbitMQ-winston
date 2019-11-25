@@ -1,4 +1,3 @@
-const {PATH_LOGS_SUCCESS, PATH_LOGS_ERROR} = require('../config/env').getArgvs()
 const winston = require('winston')
 
 /**
@@ -43,14 +42,14 @@ module.exports = (() => {
         const transportFileInfo = new winston.transports.File({
             name: 'info-file',
             level: 'info',
-            filename: pathLogInfo,
+            filename: PATH_LOGS_SUCCESS,
             json: false
         });
 
         const transportFileError = new winston.transports.File({
             name: 'error-file',
             level: 'error',
-            filename: pathLogError,
+            filename: PATH_LOGS_ERROR,
             json: false
         });
 

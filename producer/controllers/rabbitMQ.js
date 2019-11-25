@@ -1,4 +1,3 @@
-const {URL_RABBIT} = require('../config/env.js').getArgvs()
 const amqp = require('amqplib');
 
 let amqpConn = null;    // Conexion RabbitMQ
