@@ -1,0 +1,23 @@
+{
+  "name": "producer_rabbitmq",
+  "version": "1.0.0",
+  "description": "Producer and create queues",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha /test/index.js --timeout 15000 --exit"
+  },
+  "author": "Jaime Rubio",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "yargs": "^15.0.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  }
+}
