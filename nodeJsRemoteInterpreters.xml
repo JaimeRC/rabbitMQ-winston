@@ -1,0 +1,5 @@
+<application>
+  <component name="NodeJSRemoteInterpreters">
+    <interpreter node-remote-interpreter="docker://node:10-alpine/node" DOCKER_ACCOUNT_NAME="Docker" DOCKER_IMAGE_NAME="node:10-alpine" DOCKER_REMOTE_PROJECT_PATH="/opt/project" INTERPRETER_PATH="node" HELPERS_PATH=".webstorm_nodejs_helpers" INITIALIZED="false" VALID="true" VERSION="" />
+  </component>
+</application>
