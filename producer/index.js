@@ -1,5 +1,5 @@
 //RabbitMQ
-const RabbitMQ = require('../controllers/rabbitMQ')
+const RabbitMQ = require('./controllers/rabbitMQ')
 
 //Express
 const express = require('express')
