@@ -2,6 +2,10 @@
   "name": "producer_rabbitmq",
   "version": "1.0.0",
   "description": "Producer and create queues",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/JaimeRC/rabbitMQ-winston.git"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

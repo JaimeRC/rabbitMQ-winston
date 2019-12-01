@@ -2,7 +2,7 @@ const amqp = require('amqplib');
 
 let amqpConn = null;    // Conexion RabbitMQ
 let channel = null;     // Channel
-let exchange = 'logs'   //Exchange
+let exchange = 'logs'   // Exchange
 
 module.exports = class RabbitMQ {
 

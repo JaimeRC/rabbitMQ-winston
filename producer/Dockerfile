@@ -10,4 +10,5 @@ RUN npm install
 
 # Bundle app source
 
-CMD [ "npm", "run", "start" ]
+#CMD [ "npm", "run", "start" ]
+CMD ["node", "--debug", "index.js"]
