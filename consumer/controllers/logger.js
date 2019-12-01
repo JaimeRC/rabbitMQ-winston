@@ -1,4 +1,5 @@
 const winston = require('winston')
+const {env: {PATH_LOGS_SUCCESS, PATH_LOGS_ERROR}} = process
 
 /**
  * Modulo para crear logs tanto de 'informacion' como de 'errores' en archivos diferentes.
@@ -42,14 +43,14 @@ module.exports = (() => {
         const transportFileInfo = new winston.transports.File({
             name: 'info-file',
             level: 'info',
-            filename: PATH_LOGS_SUCCESS,
+            filename: PATH_LOGS_SUCCESS || '../logs',
             json: false
         });
 
         const transportFileError = new winston.transports.File({
             name: 'error-file',
             level: 'error',
-            filename: PATH_LOGS_ERROR,
+            filename: PATH_LOGS_ERROR || '../logs',
             json: false
         });
 

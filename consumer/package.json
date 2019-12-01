@@ -12,11 +12,11 @@
   },
   "scripts": {
     "start": "node index.js",
+    "debug": "node --inspect-brk=127.0.0.1 index.js",
     "test": "mocha /test/index.js --timeout 15000 --exit"
   },
   "author": "Jaime Rubio",
   "license": "ISC",
-
   "dependencies": {
     "amqplib": "^0.5.5",
     "winston": "^3.2.1"

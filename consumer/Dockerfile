@@ -5,10 +5,9 @@ RUN mkdir -p /src
 WORKDIR /src
 
 # Install app dependencies
-COPY . /
+COPY . .
 RUN npm install
 
-# Bundle app source
-
-#CMD [ "npm", "run", "start" ]
-CMD ["node", "--debug", "index.js"]
+CMD [ "npm", "run", "start" ]
+#CMD [ "npm", "run", "debug" ]
+#CMD ["node", "--debug", "index.js"]
