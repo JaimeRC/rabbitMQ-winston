@@ -1,15 +1,28 @@
+const {env: {NODE_ENV, PORT_EXPRESS}} = process
+
 //RabbitMQ
 const RabbitMQ = require('./controllers/rabbitMQ')
+
+//Morgan
+const morgan = require('morgan')
 
 //Express
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
 
 //Routes
 const routes = require('./routes')
 
 //Traceability
-if (NODE_ENV === 'local') app.use(morgan('dev'))
+if (NODE_ENV === 'local_devel') app.use(morgan('dev'))
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/check', (req, res) => {
+    res.send({status: true, message: 'Check ok'})
+})
 
 app.use('/', routes)
 

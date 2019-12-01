@@ -2,6 +2,7 @@ const {RabbitMQ} = require('../controllers')
 
 module.exports = async (req, res) => {
     try {
+
         const {body: {message}} = req
 
         await RabbitMQ.sendMessageInfo(message)
