@@ -9,7 +9,7 @@ module.exports = {
     getArgvs() {
         return yargs
             .usage('Usage: node $0 [options]')
-            .example('node $0 -ne local_level -p 4000 -ps /logs/logsSuccess.log -pe /logs/logsError.log -ur amqp://guest:guest@10.100.2.99:5672 -qi logsSuccess -qe logsError')
+            .example('node $0 -ne local_level -p 4000 -ps /logs/logsSuccess.txt -pe /logs/logsError.txt -ur amqp://guest:guest@10.100.2.99:5672 -qi logsSuccess -qe logsError')
             .option('NODE_ENV', {
                 alias: 'ne',
                 describe: 'Write an environment for the process',
@@ -27,13 +27,13 @@ module.exports = {
                 alias: 'ps',
                 describe: 'Write a path to the info log',
                 type: String,
-                default: `${path}/logs/logsSuccess.log`
+                default: `${path}/logs/logsSuccess.txt`
             })
             .option('PATH_LOGS_ERROR', {
                 alias: 'pe',
                 describe: 'Write a path to the error log',
                 type: String,
-                default: `${path}/logs/logsError.log`
+                default: `${path}/logs/logsError.txt`
             })
             .option('URL_RABBIT', {
                 alias: 'ur',

@@ -1,4 +1,3 @@
-
 version: '3'
 
 services:
@@ -18,7 +17,7 @@ services:
       - URL_RABBIT=amqp://rabbitmq
       - NODE_ENV=local_devel
       - PORT_EXPRESS=8080
-    links:
+    depends_on:
       - rabbitmq
 
   consumer:
@@ -28,21 +27,22 @@ services:
       dockerfile: consumer/Dockerfile
     volumes:
       - ./consumer:/src
+      - ./consumer/logs:/src/logs
     networks:
       - app-network
     environment:
       - URL_RABBIT=amqp://rabbitmq
       - NODE_ENV=local_devel
-      - PATH_LOGS_SUCCESS=¿?
-      - PATH_LOGS_ERROR=¿?
-    links:
+      - PATH_LOGS_SUCCESS=/src/logs/logsSuccess.log
+      - PATH_LOGS_ERROR=/src/logs/logsError.log
+    depends_on:
       - rabbitmq
       - producer
 
   rabbitmq:
     container_name: 'rabbitmq'
     image: rabbitmq:3-management
-    hostname: "rabbit"
+    hostname: "rabbitmq"
     labels:
       NAME: "rabbitmq"
     ports:
