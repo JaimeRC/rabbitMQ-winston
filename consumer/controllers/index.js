@@ -1,4 +1,4 @@
 const logger = require('./logger')
-const RabbitMQ = require('./rabbitMQ')
+const saveData = require('./saveData')
 
-module.exports = {logger, RabbitMQ}
+module.exports = {logger, saveData}
