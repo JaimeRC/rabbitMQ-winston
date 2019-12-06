@@ -7,9 +7,9 @@ const {env: {PATH_LOGS_SUCCESS, PATH_LOGS_ERROR}} = process
  * Ejemplo de como se guardan los logs:
  *
  *          Tipo    T.Actual    Estado    T.Proceso  T.Transporte         Maquina                        IdProceso                Peticion         Mensaje
- * @example info    12:37:17     [OK]         49           1         jaime-desarrollo     bbbf67b5-df7d-4f01-aa20-a6e317748ecb     agenciasdep
- * @example error   12:37:17     [KO]         49           1         jaime-desarrollo     bbbf67b5-df7d-4f01-aa20-a6e317748ecb     agenciasdep    Cannot find module '../api/getHotelesPrveedoresWeb'
- * @example warn    12:37:17     [TIMEOUT]    49           1         jaime-desarrollo     bbbf67b5-df7d-4f01-aa20-a6e317748ecb     agenciasdep    Sin respuesta, tiempo limite 5sg
+ * @example info    12:37:17     [OK]         49           1         jaime-desarrollo     bbbf67b5-df7d-4f01-aa20-a6e317748ecb     logs.success
+ * @example error   12:37:17     [KO]         49           1         jaime-desarrollo     bbbf67b5-df7d-4f01-aa20-a6e317748ecb     logs.error
+ * @example warn    12:37:17     [TIMEOUT]    49           1         jaime-desarrollo     bbbf67b5-df7d-4f01-aa20-a6e317748ecb     logs.timeout
  *
  */
 
@@ -43,14 +43,14 @@ module.exports = (() => {
         const transportFileInfo = new winston.transports.File({
             name: 'info-file',
             level: 'info',
-            filename: PATH_LOGS_SUCCESS || '../logs',
+            filename: PATH_LOGS_SUCCESS,
             json: false
         });
 
         const transportFileError = new winston.transports.File({
             name: 'error-file',
             level: 'error',
-            filename: PATH_LOGS_ERROR || '../logs',
+            filename: PATH_LOGS_ERROR ,
             json: false
         });
 
@@ -72,8 +72,6 @@ module.exports = (() => {
                 ],
                 exitOnError: false
             })
-
-
         }
 
         let getWinstonError = function () {
@@ -99,7 +97,7 @@ module.exports = (() => {
          *
          * @param {String} status           Estado de la peticion (OK,KO,TIMEOUT)
          * @param {Number} entryTime        El tiempo de entrada de la peticion
-         * @param {Number} pandoraTime      El tiempo de salida del programa que realiza la peticion
+         * @param {Number} timeProcess      El tiempo de salida del programa que realiza la peticion
          * @param {String} machine          El nombre de la maquina que realiza la consulta
          * @param {String} id               El id de la peticion (externa)
          * @param {String} petition         El tipo de peticion que se ha solicitado
@@ -107,56 +105,14 @@ module.exports = (() => {
          */
 
         return {
-            setLog: function (status, timeProcess, timeTransport, query, error) {
-
-                if (!loggerInfo)
-                    loggerInfo = getWinstonInfo()
-                if (!loggerError)
-                    loggerError = getWinstonError()
-
-                const timeTotal = timeProcess + timeTransport;
-
-                const message = {
-                    host: os.hostname(),
-                    status: status,
-                    timeTotal: timeTotal,
-                    timeProcess: timeProcess,
-                    timeTransport: timeTransport,
-                    machine: query.maquina,
-                    id: query.id,
-                    petition: query.service,
-                    proveedor: query.proveedor ? query.proveedor : '',
-                    hoteles: query.hoteles ? query.hoteles.length : '',
-                }
-
-                if (error)
-                    message.error = error
-
-                switch (status) {
-                    case 'OK':
-
-                        //publisher.publish("log_dataservicefront_info",message)
-                        loggerInfo.info(message);
-                        break;
-
-                    case 'KO':
-                        //publisher.publish("log_dataservicefront_error",message)
-                        loggerError.error(message);
-                        break;
-
-                    default:
-                        loggerInfo.warn(message)
-                }
-
-            },
             consumeLogInfo: function (message) {
+                console.log(message)
                 if (!loggerInfo) loggerInfo = getWinstonInfo();
                 loggerInfo.info(message);
             },
             consumeLogError: function (message) {
                 if (!loggerError) loggerError = getWinstonError();
                 loggerError.error(message);
-
             }
         }
     }
