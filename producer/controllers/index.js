@@ -1,3 +1,5 @@
-const RabbitMQ = require('./rabbitMQ')
+const routing = require('./routing')
+const rpc = require('./rpc')
 
-module.exports = { RabbitMQ}
+
+module.exports = { routing,rpc}
