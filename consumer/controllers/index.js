@@ -1,4 +1,4 @@
 const logger = require('./logger')
-const saveData = require('./saveData')
+const action = require('./action')
 
-module.exports = {logger, saveData}
+module.exports = {logger, action}
