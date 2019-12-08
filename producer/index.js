@@ -1,7 +1,7 @@
 const {env: {NODE_ENV, PORT_EXPRESS}} = process
 
 //RabbitMQ
-const RabbitMQ = require('./controllers/rabbitMQ')
+const RabbitMQ = require('./config/RabbitMQ')
 
 //Morgan
 const morgan = require('morgan')
@@ -20,9 +20,7 @@ if (NODE_ENV === 'local_devel') app.use(morgan('dev'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/check', (req, res) => {
-    res.send({status: true, message: 'Check ok'})
-})
+app.get('/check', (req, res) => res.send({status: true, message: 'Check OK'}))
 
 app.use('/', routes)
 

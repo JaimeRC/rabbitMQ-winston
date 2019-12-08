@@ -1,11 +1,11 @@
-const {RabbitMQ} = require('../controllers')
+const {routing} = require('../controllers')
 
 module.exports = async (req, res) => {
     try {
 
         const {body: {message}} = req
 
-        await RabbitMQ.sendMessageInfo(message)
+        await routing.sendMessageInfo(message)
 
         res.send({statusOk: true, results: `Message: ${JSON.stringify(message)} sent to 'logs.info' queue.`})
 
