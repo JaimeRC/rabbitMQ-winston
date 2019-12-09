@@ -63,8 +63,8 @@ Gestion de colas con RabbitMQ para el almacenamiento logs con Winston.
  
 5. En el caso de que no se haya conectado correctamente, reiniciamos el contenedor que no se haya conectado correctamente:
 
-        `docker restart consumer` 
-        `docker restart producer` 
+        docker restart consumer 
+        docker restart producer 
 
 
         
