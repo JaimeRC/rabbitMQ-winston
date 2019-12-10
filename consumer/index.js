@@ -3,7 +3,7 @@ const amqp = require('amqplib');
 
 const {env: {URL_RABBIT}} = process
 
-const {Logs, Job} = require('./consumers')
+const {Logs} = require('./consumers')
 
 let amqpConn = null;    // Conexion RabbitMQ
 
@@ -18,8 +18,6 @@ class RabbitMQ {
             let channel = await amqpConn.createChannel()
 
             Logs.subscribeLogs(channel)
-
-            Job.subscribeJobQueue(channel)
 
         } catch (error) {
             console.log(TAG, 'createConnection -> ', error.message)
