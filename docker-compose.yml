@@ -39,6 +39,22 @@ services:
       - rabbitmq
       - producer
 
+  service:
+    container_name: 'service'
+    build:
+      context: ./
+      dockerfile: service/Dockerfile
+    volumes:
+      - ./service:/src
+    networks:
+      - app-network
+    environment:
+      - URL_RABBIT=amqp://rabbitmq
+      - NODE_ENV=local_devel
+    depends_on:
+      - rabbitmq
+      - producer
+
   rabbitmq:
     container_name: 'rabbitmq'
     image: rabbitmq:3-management

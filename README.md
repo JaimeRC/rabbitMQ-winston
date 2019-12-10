@@ -5,10 +5,16 @@ Gestion de colas con RabbitMQ para el almacenamiento logs con Winston.
 ## Estructura del Proyecto
 
     docker-compose.yml                      # Crea la red, imagenes y contenedores (RabbitMQ, Producer y Cnsumer)
-        ├───consumer                        # Archivos para el contenerdor Consumer
+        ├───consumer                        # Microservicio Consumer para gestión de Logs
         |       ├───consumers               # Consumidores de las colas
         |       ├───controllers             # Controladores (Winston)
         |       ├───logs                    # Almacenamiento de Logs
+        |       ├───test                    # Archivos de Test
+        |       ├───Dockerfile              # Acciones sobre el contenedor
+        |       └───index.js                # Archivo de inicializacion (RabbitMQ)
+        ├───service                         # Microservicio Service simulando un servicio cualquiera.
+        |       ├───consumers               # Consumidores de las colas
+        |       ├───controllers             # Controladores
         |       ├───test                    # Archivos de Test
         |       ├───Dockerfile              # Acciones sobre el contenedor
         |       └───index.js                # Archivo de inicializacion (RabbitMQ)
@@ -38,6 +44,7 @@ Gestion de colas con RabbitMQ para el almacenamiento logs con Winston.
             Creating rabbitmq ... done
             Creating producer ... done
             Creating consumer ... done
+            Creating service  ... done
 
     
 4. Verificar que las conexiones se han realizado correctamente:
@@ -58,13 +65,22 @@ Gestion de colas con RabbitMQ para el almacenamiento logs con Winston.
            > node index.js
            
            RabbitMQ connected in amqp://rabbitmq
-            [*] Awaiting RPC requests
             [*] Waiting for logs.
+            
+   - `docker logs -f service`
+
+            > service_rabbitmq@1.0.0 start /src
+            > node index.js
+            
+            RabbitMQ connected in amqp://rabbitmq
+             [*] Awaiting RPC requests
+
  
 5. En el caso de que no se haya conectado correctamente, reiniciamos el contenedor que no se haya conectado correctamente:
 
-        `docker restart consumer` 
-        `docker restart producer` 
+        docker restart consumer 
+        docker restart service 
+        docker restart producer 
 
 
         
