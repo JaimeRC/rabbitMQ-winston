@@ -10,13 +10,13 @@ services:
     volumes:
       - ./producer:/src
     ports:
-      - "8080:8080"
+      - "${PRODUCER_PORT}:${PRODUCER_PORT}"
     networks:
       - app-network
     environment:
       - URL_RABBIT=amqp://rabbitmq
-      - NODE_ENV=local_devel
-      - PORT_EXPRESS=8080
+      - NODE_ENV=${NODE_ENV}
+      - PORT_EXPRESS=${PRODUCER_PORT}
     depends_on:
       - rabbitmq
 
@@ -32,9 +32,9 @@ services:
       - app-network
     environment:
       - URL_RABBIT=amqp://rabbitmq
-      - NODE_ENV=local_devel
-      - PATH_LOGS_SUCCESS=/src/logs/logsSuccess.log
-      - PATH_LOGS_ERROR=/src/logs/logsError.log
+      - NODE_ENV=${NODE_ENV}
+      - PATH_LOGS_SUCCESS=${PATH_LOGS_SUCCESS}
+      - PATH_LOGS_ERROR=${PATH_LOGS_ERROR}
     depends_on:
       - rabbitmq
       - producer
@@ -50,7 +50,7 @@ services:
       - app-network
     environment:
       - URL_RABBIT=amqp://rabbitmq
-      - NODE_ENV=local_devel
+      - NODE_ENV=${NODE_ENV}
     depends_on:
       - rabbitmq
       - producer
@@ -62,8 +62,8 @@ services:
     labels:
       NAME: "rabbitmq"
     ports:
-      - "15672:15672"
-      - "5672:5672"
+      - "${RABBITMQ_PORT1}:${RABBITMQ_PORT1}"
+      - "${RABBITMQ_PORT2}:${RABBITMQ_PORT2}"
     networks:
       - app-network
 
