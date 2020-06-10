@@ -1,0 +1,27 @@
+{
+  "name": "consumer_rabbitmq",
+  "version": "1.0.0",
+  "description": "Consumer and save logs",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/JaimeRC/rabbitMQ-winston.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JaimeRC/rabbitMQ-winston/issues"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "debug": "node --inspect-brk=127.0.0.1 index.js",
+    "test": "mocha /test/index.js --timeout 15000 --exit"
+  },
+  "author": "Jaime Rubio",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "winston": "^3.2.1"
+  }
+}
